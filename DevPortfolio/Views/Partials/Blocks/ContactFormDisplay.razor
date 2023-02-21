@@ -1,0 +1,62 @@
+﻿@using DevPortfolio.Models;
+@using DevPortfolio.Services;
+@using Microsoft.AspNetCore.Components.Forms
+
+@inject MailSendingService MailSendingService
+
+@if (!_sentMessage)
+{
+    <EditForm Model="@_model" OnValidSubmit="@ValidSubmit" OnInvalidSubmit="HandleInvalidSubmit">
+        <DataAnnotationsValidator />
+
+        <!-- Name input-->
+        <div class="form-floating mb-3">
+            <InputText class="form-control" id="name" type="text" placeholder="Enter your name..." @bind-Value="_model.Name"/>
+            <label for="name">Full name</label>
+            <ValidationMessage For="() => _model.Name" class="text-danger" />
+        </div>
+        <!-- Email address input-->
+        <div class="form-floating mb-3">
+            <InputText class="form-control" id="email" type="email" placeholder="name@example.com" @bind-Value="_model.Email" />
+            <label for="email">Email address</label>
+            <ValidationMessage For="() => _model.Email" class="text-danger"/>
+        </div>
+        <!-- Phone number input-->
+        <div class="form-floating mb-3">
+            <InputText class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" @bind-Value="_model.Phone"/>
+            <label for="phone">Phone number</label>
+            <ValidationMessage For="() => _model.Phone" class="text-danger" />
+        </div>
+        <!-- Message input-->
+        <div class="form-floating mb-3">
+            <InputTextArea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" @bind-Value="_model.Message"></InputTextArea>
+            <label for="message">Message</label>
+            <ValidationMessage For="() => _model.Message" class="text-danger" />
+        </div>
+
+        <ValidationSummary class="text-danger" />
+
+        <input class="btn btn-secondary btn-xl" type="submit" value="Send"/>
+
+    </EditForm>
+}
+else
+{
+    <h3 class="text-white text-center">Thanks for your submission! I will get back to you soon!</h3>
+}
+
+@code {
+    private ContactFormModel _model = new();
+    private bool _sentMessage = false;
+
+    private void ValidSubmit(EditContext context)
+    {
+        MailSendingService.Send(_model);
+        _sentMessage = true;
+    }
+
+    private void HandleInvalidSubmit(EditContext context)
+    {
+        Console.WriteLine("");
+    }
+}

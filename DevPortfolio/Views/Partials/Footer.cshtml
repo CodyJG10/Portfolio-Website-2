@@ -1,0 +1,32 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+ <!-- Footer-->
+<footer class="footer text-center">
+    <div class="container">
+        <div class="row">
+            <!-- Footer Location-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase mb-4">@Model.Value("footerColumn1Title")</h4>
+                <p class="lead mb-0">
+                    @Model.Value("footerColumn1Content")
+                </p>
+            </div>
+            <!-- Footer Social Icons-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase mb-4">@Model.Value("footerColumn2Title")</h4>
+               @Model.Value("footerColumn2Content")
+            </div>
+            <!-- Footer About Text-->
+            <div class="col-lg-4">
+                <h4 class="text-uppercase mb-4">@Model.Value("footerColumn3Title")</h4>
+                <p class="lead mb-0">
+                    @Model.Value("footerColumn3Content")
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Copyright Section-->
+<div class="copyright py-4 text-center text-white">
+    <div class="container"><small>@($"Copyright © {DateTime.Now.Year} By {Model.Value("copyright")}")</small></div>
+</div>

@@ -1,0 +1,14 @@
+﻿@using DevPortfolio.Models;
+@using Umbraco.Cms.Core.Models.Blocks;
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+    
+@{
+    var tiles = Model.Value("technologiesTiles") as IEnumerable<BlockListItem>;
+}
+
+@foreach (var tile in tiles)
+{
+    @await Html.PartialAsync("Partials/Portfolio Tile", tile.Content)
+}
